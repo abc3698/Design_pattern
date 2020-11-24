@@ -1,92 +1,92 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include <memory>
-//class Config
-//{
-//private:
-//	// ¿ÜºÎ¿¡¼­ »ı¼ºÀÚ ±İÁö
-//	Config()
-//	{
-//		std::cout << "Config°¡ »ı¼ºÀÌ µÇ¾ú½À´Ï´Ù" << std::endl;
-//	}
-//	// ¿ÜºÎ¿¡¼­ º¹»ç »ı¼ºÀÚ ±İÁö
-//	Config(Config& rhs)
-//	{
-//		std::cout << "Config°¡ º¹»ç µÇ¾ú½À´Ï´Ù" << std::endl;
-//	}
-//
-//	static void Deleter(Config* p_test)
-//	{
-//		std::cout << "Config°¡ Á¦°ÅµÇ¾ú½À´Ï´Ù" << std::endl;
-//		delete p_test;
-//	}
-//
-//	static std::shared_ptr<Config> instance;
-//
-//public:
-//	static std::shared_ptr<Config> getInstance()
-//	{
-//		instance = std::make_shared<Config>();
-//		return instance;
-//	}
-//};
-//
-//int main()
-//{
-//	auto cfg1 = Config::getInstance();
-//	auto cfg2 = Config::getInstance();	
-//}
-
 class Config
 {
-protected:
-	// ¿ÜºÎ¿¡¼­ »ı¼ºÀÚ ±İÁö
+private:
+	// ì™¸ë¶€ì—ì„œ ìƒì„±ì ê¸ˆì§€
 	Config()
 	{
-		std::cout << "Config°¡ »ı¼ºÀÌ µÇ¾ú½À´Ï´Ù" << std::endl;
+		std::cout << "Configê°€ ìƒì„±ì´ ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
 	}
-	// ¿ÜºÎ¿¡¼­ º¹»ç »ı¼ºÀÚ ±İÁö
+	// ì™¸ë¶€ì—ì„œ ë³µì‚¬ ìƒì„±ì ê¸ˆì§€
 	Config(Config& rhs)
 	{
-		std::cout << "Config°¡ º¹»ç µÇ¾ú½À´Ï´Ù" << std::endl;
+		std::cout << "Configê°€ ë³µì‚¬ ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
 	}
-	
-	static Config* instance;	
-};
 
-class Env : public Config
-{
+	static void Deleter(Config* p_test)
+	{
+		std::cout << "Configê°€ ì œê±°ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
+		delete p_test;
+	}
+
+	static std::shared_ptr<Config> instance;
+
 public:
-	void setting()
+	static std::shared_ptr<Config> getInstance()
 	{
-		std::cout << "½Ã½ºÅÛ È¯°æÀ» ¼³Á¤ÇÕ´Ï´Ù" << std::endl;
-	}
-
-	static Config* getInstance()
-	{
-		if (instance == nullptr)
-		{
-			std::cout << "Env°¡ »ı¼ºÀÌ µÇ¾ú½À´Ï´Ù" << std::endl;
-			instance = new Env;
-		}
-		std::cout << "Env°¡ ¹İÈ¯ µÇ¾ú½À´Ï´Ù" << std::endl;
+		instance = std::make_shared<Config>();
 		return instance;
 	}
-
-	static void Delete()
-	{
-		if (instance != nullptr)
-		{
-			std::cout << "Env°¡ Á¦°ÅµÇ¾ú½À´Ï´Ù" << std::endl;
-			delete instance;
-		}
-	}
 };
-
-Config* Config::instance = nullptr;
 
 int main()
 {
-	auto cfg1 = Env::getInstance();	
-	static_cast<Env*>(cfg1)->setting();
-	Env::Delete();
+	auto cfg1 = Config::getInstance();
+	auto cfg2 = Config::getInstance();	
 }
+
+//class Config
+//{
+//protected:
+//	// ì™¸ë¶€ì—ì„œ ìƒì„±ì ê¸ˆì§€
+//	Config()
+//	{
+//		std::cout << "Configê°€ ìƒì„±ì´ ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
+//	}
+//	// ì™¸ë¶€ì—ì„œ ë³µì‚¬ ìƒì„±ì ê¸ˆì§€
+//	Config(Config& rhs)
+//	{
+//		std::cout << "Configê°€ ë³µì‚¬ ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
+//	}
+//	
+//	static Config* instance;	
+//};
+//
+//class Env : public Config
+//{
+//public:
+//	void setting()
+//	{
+//		std::cout << "ì‹œìŠ¤í…œ í™˜ê²½ì„ ì„¤ì •í•©ë‹ˆë‹¤" << std::endl;
+//	}
+//
+//	static Config* getInstance()
+//	{
+//		if (instance == nullptr)
+//		{
+//			std::cout << "Envê°€ ìƒì„±ì´ ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
+//			instance = new Env;
+//		}
+//		std::cout << "Envê°€ ë°˜í™˜ ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
+//		return instance;
+//	}
+//
+//	static void Delete()
+//	{
+//		if (instance != nullptr)
+//		{
+//			std::cout << "Envê°€ ì œê±°ë˜ì—ˆìŠµë‹ˆë‹¤" << std::endl;
+//			delete instance;
+//		}
+//	}
+//};
+//
+//Config* Config::instance = nullptr;
+//
+//int main()
+//{
+//	auto cfg1 = Env::getInstance();	
+//	static_cast<Env*>(cfg1)->setting();
+//	Env::Delete();
+//}

@@ -14,11 +14,12 @@ public:
 	virtual void makeAssemble() = 0;
 };
 
+template<typename T1, typename T2>
 class Factory
 {
 public:
-	virtual std::shared_ptr<TireProdct> createTire() = 0;
-	virtual std::shared_ptr<DoorProdct> createDoor() = 0;
+	virtual std::shared_ptr<T1> createTire() = 0;
+	virtual std::shared_ptr<T2> createDoor() = 0;
 };
 
 class StateTireProdct : public TireProdct
@@ -51,7 +52,8 @@ public:
 	}
 };
 
-class StateFactory : public Factory
+template<typename T1, typename T2>
+class StateFactory : public Factory<T1, T2>
 {
 public:
 	StateFactory()
@@ -59,12 +61,12 @@ public:
 		std::cout << "StateFactory를 생성합니다" << std::endl;
 	}
 
-	std::shared_ptr<TireProdct> createTire()
+	std::shared_ptr<T1> createTire()
 	{
 		return std::make_shared<StateTireProdct>();
 	}
 
-	std::shared_ptr<DoorProdct> createDoor()
+	std::shared_ptr<T2> createDoor()
 	{
 		return std::make_shared<StateDoorProdct>();
 	}
@@ -100,7 +102,8 @@ public:
 	}
 };
 
-class KoreaFactory : public Factory
+template<typename T1, typename T2>
+class KoreaFactory : public Factory<T1, T2>
 {
 public:
 	KoreaFactory()
@@ -108,12 +111,12 @@ public:
 		std::cout << "KoreaFactory를 생성합니다" << std::endl;
 	}
 
-	std::shared_ptr<TireProdct> createTire()
+	std::shared_ptr<T1> createTire()
 	{
 		return std::make_shared<KoreaTireProdct>();
 	}
 
-	std::shared_ptr<DoorProdct> createDoor()
+	std::shared_ptr<T2> createDoor()
 	{
 		return std::make_shared<KoreaDoorProdct>();
 	}
@@ -121,7 +124,7 @@ public:
 
 int main()
 {
-	auto korea = std::make_shared<KoreaFactory>();
+	auto korea = std::make_shared<KoreaFactory<TireProdct, DoorProdct>>();
 	auto ham = korea->createTire();
 	ham->makeAssemble();
 
@@ -130,7 +133,7 @@ int main()
 
 	std::cout << std::endl;
 
-	auto state = std::make_shared<StateFactory>();
+	auto state = std::make_shared<StateFactory<TireProdct, DoorProdct>>();
 	ham = state->createTire();
 	ham->makeAssemble();
 

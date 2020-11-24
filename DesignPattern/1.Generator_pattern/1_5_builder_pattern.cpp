@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include <memory>
 #include <string>
 
@@ -75,14 +75,14 @@ public:
 public:
 	Computer()
 	{
-		std::cout << "Computer¸¦ »ý¼ºÇÕ´Ï´Ù" << std::endl;
+		std::cout << "Computerë¥¼ ìƒì„±í•©ë‹ˆë‹¤" << std::endl;
 	}
 
 	std::string _toString()
 	{
-		std::string str1 = "ÀÌ ÄÄÇ»ÅÍÀÇ »ç¾çÀº CPU = " + this->_cpu->getVendor();
+		std::string str1 = "ì´ ì»´í“¨í„°ì˜ ì‚¬ì–‘ì€ CPU = " + this->_cpu->getVendor();
 		std::string str2 = ", RAM = " + std::to_string(this->memory()) + ".GB";
-		std::string str3 = ", Storage = " + std::to_string(this->storage()) + ".GB ÀÔ´Ï´Ù" + "\n";
+		std::string str3 = ", Storage = " + std::to_string(this->storage()) + ".GB ìž…ë‹ˆë‹¤" + "\n";
 		
 		return str1 + str2 + str3;
 	}
@@ -119,25 +119,25 @@ class ProductModel : public Algorithm
 public:
 	ProductModel()
 	{
-		std::cout << "ProductModel °´Ã¼¸¦ »ý¼ºÇÕ´Ï´Ù" << std::endl;
+		std::cout << "ProductModel ê°ì²´ë¥¼ ìƒì„±í•©ë‹ˆë‹¤" << std::endl;
 		_composite = std::make_shared<Computer>();
 	}
 
 	void setCpu(std::string str)
 	{
-		std::cout << "CPU¸¦ ¼³Á¤ÇÕ´Ï´Ù" << std::endl;		
+		std::cout << "CPUë¥¼ ì„¤ì •í•©ë‹ˆë‹¤" << std::endl;		
 		_composite->_cpu = std::make_shared<CPU>(str);
 	}
 	
 	void setRam(int size)
 	{
-		std::cout << "RAM¸¦ ¼³Á¤ÇÕ´Ï´Ù" << std::endl;
+		std::cout << "RAMë¥¼ ì„¤ì •í•©ë‹ˆë‹¤" << std::endl;
 		_composite->_memory = std::make_shared<Memory>(size);
 	}
 	
 	void setStorage(int size)
 	{
-		std::cout << "Storage¸¦ ¼³Á¤ÇÕ´Ï´Ù" << std::endl;
+		std::cout << "Storageë¥¼ ì„¤ì •í•©ë‹ˆë‹¤" << std::endl;
 		_composite->_storage = std::make_shared<Storage>(size);
 	}
 };
@@ -150,7 +150,7 @@ protected:
 public:
 	void setAlgorithm(std::shared_ptr<Algorithm> algorithm)
 	{
-		std::cout << "ºôµå °´Ã¼¸¦ ÀúÀåÇÕ´Ï´Ù" << std::endl;
+		std::cout << "ë¹Œë“œ ê°ì²´ë¥¼ ì €ìž¥í•©ë‹ˆë‹¤" << std::endl;
 		_algorithm = algorithm;
 	}
 
@@ -167,13 +167,13 @@ class Factory : public Builder
 public:
 	Factory(std::shared_ptr<Algorithm> algorithm)
 	{
-		std::cout << "Factory °´Ã¼¸¦ »ý¼ºÇÕ´Ï´Ù" << std::endl;
+		std::cout << "Factory ê°ì²´ë¥¼ ìƒì„±í•©ë‹ˆë‹¤" << std::endl;
 		setAlgorithm(algorithm);
 	}
 
 	 std::shared_ptr<Builder> build()
 	{
-		std::cout << "===ºôµåÇÕ´Ï´Ù===" << std::endl;
+		std::cout << "===ë¹Œë“œí•©ë‹ˆë‹¤===" << std::endl;
 		_algorithm->setCpu("i7");
 		_algorithm->setRam(16);
 		_algorithm->setStorage(512);		

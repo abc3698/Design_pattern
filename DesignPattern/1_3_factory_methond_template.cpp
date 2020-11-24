@@ -24,18 +24,19 @@ public:
 	}
 };
 
+template<typename T>
 class Factory
 {
 protected:
-	std::shared_ptr<Prodcut>  create(std::string model)
+	std::shared_ptr<T>  create(std::string model)
 	{
 		return this->createProduct(model);
 	}
 public:
-	virtual std::shared_ptr<Prodcut> createProduct(std::string model) = 0;
+	virtual std::shared_ptr<T> createProduct(std::string model) = 0;
 };
 
-class ProductFactory final : public Factory {
+class ProductFactory final : public Factory<Prodcut> {
 public:
 	ProductFactory()
 	{
@@ -44,7 +45,7 @@ public:
 
 	virtual std::shared_ptr<Prodcut> createProduct(std::string model)
 	{
-		if(model == "LG")
+		if (model == "LG")
 			return std::make_shared<LGProduct>();
 		return std::make_shared<SamsungProduct>();
 	}

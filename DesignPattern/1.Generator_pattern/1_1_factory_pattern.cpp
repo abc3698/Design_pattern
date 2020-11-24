@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include <string>
 #include <memory>
 
@@ -23,7 +23,7 @@ class Korea : public Language
     public:
         std::string text() override
         {
-            std::string str = "¾È³çÇÏ¼¼¿ä";
+            std::string str = "ì•ˆë…•í•˜ì„¸ìš”";
             return str;
         }
 };

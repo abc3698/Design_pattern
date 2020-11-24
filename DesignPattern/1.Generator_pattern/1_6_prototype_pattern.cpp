@@ -1,4 +1,4 @@
-#include<iostream>
+ï»¿#include<iostream>
 #include <memory>
 #include <string>
 
@@ -10,7 +10,7 @@ private:
 public:
 	Hello(std::string msg)
 	{
-		std::cout << "Hello¸¦ »ý¼ºÇÕ´Ï´Ù" << std::endl;
+		std::cout << "Helloë¥¼ ìƒì„±í•©ë‹ˆë‹¤" << std::endl;
 		this->msg = msg;
 	}
 
@@ -32,10 +32,10 @@ public:
 
 int main()
 {
-	auto hello = std::make_shared<Hello>("¾È³çÇÏ¼¼¿ä");
-	std::cout << "¿øº» ³»¿ë : " << hello->getMessage() << std::endl;
+	auto hello = std::make_shared<Hello>("ì•ˆë…•í•˜ì„¸ìš”");
+	std::cout << "ì›ë³¸ ë‚´ìš© : " << hello->getMessage() << std::endl;
 
 	auto hello2 = hello->clone();
 	hello2->setMessage("Hello world");
-	std::cout << "¼öÁ¤ ³»¿ë : " << hello2->getMessage() << std::endl;
+	std::cout << "ìˆ˜ì • ë‚´ìš© : " << hello2->getMessage() << std::endl;
 }
