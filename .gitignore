@@ -17,3 +17,4 @@
 *.db-shm
 *.db-wal
 *.opendb
+DesignPattern/.editorconfig
