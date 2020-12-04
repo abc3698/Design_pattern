@@ -1,6 +1,7 @@
 ﻿#include<iostream>
 #include <memory>
 #include <string>
+#include <map>
 
 class Hello
 {
@@ -31,21 +32,33 @@ std::shared_ptr<Hello> Hello::instance = nullptr;
 
 class Factory
 {
+private :
+	// 공유 메모리
+	std::map<std::string, std::shared_ptr<Hello>> pool;
+
 public:
-	std::shared_ptr<Hello> make()
+	std::shared_ptr<Hello> make(std::string name)
 	{
-		std::cout << "팩토리 생성 요청 = ";
-		return Hello::getInstance();
+		if (pool.find(name) == pool.end())
+		{
+			std::cout << "팩토리 생성 요청 = ";
+			pool.insert(std::make_pair(name, Hello::getInstance()));
+			return pool[name];
+		}
+		
+		std::cout << "저장된 pool 객체 반환" << std::endl;
+		return pool[name];
 	}
 };
 
 int main()
 {
+	auto factory = std::make_shared<Factory>();
 	// 팩토리 객체 1
-	auto hello1 = std::make_shared<Factory>()->make();
+	auto hello1 = factory->make("Hello");
 
 	// 팩토리 객체 2
-	auto hello2 = std::make_shared<Factory>()->make();
+	auto hello2 = factory->make("Hello");
 
 	if (hello1 == hello2)
 	{
